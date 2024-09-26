@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ProductStockViewModel>
+@{
+    var categories = ViewBag.Categories as IEnumerable<Categories>;
+}
+
+<h1>Ürünler</h1>
+
+<form method="get" action="@Url.Action("Index")">
+    <div class="form-group">
+        <label for="categoryId">Kategori Seçin:</label>
+        <select id="categoryId" name="categoryId" class="form-control" onchange="this.form.submit()">
+            <option value="">Tüm Kategoriler</option>
+            @foreach (var category in categories)
+            {
+                <option value="@category.CategoryId">@category.CategoryName</option>
+            }
+        </select>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Ürün ID</th>
+            <th>Ürün Adı</th>
+            <th>Son Güncel Fiyat</th>
+            <th>Toplam Stok</th>
+            <th>Minimum Stok</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr style="@(item.TotalStock < item.MinimumStockLevel ? "background-color: #f8d7da;" : "")">
+                <td>@item.ProductId</td>
+                <td>@item.ProductName</td>
+                <td>@item.CurrentPrice.ToString("C")</td> 
+                <td>@item.TotalStock</td>
+                <td>@item.MinimumStockLevel</td>
+            </tr>
+        }
+    </tbody>
+</table>

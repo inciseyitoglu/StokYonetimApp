@@ -1,0 +1,29 @@
+﻿@model IEnumerable<PriceHistory>
+
+<h1>Fiyat Geçmişi</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Fiyat Geçmişi ID</th>
+            <th>Ürün Adı</th>
+            <th>Eski Fiyat</th>
+            <th>Yeni Fiyat</th>
+            <th>Değişim Tarihi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var priceHistory in Model)
+        {
+            <tr>
+                <td>@priceHistory.PriceHistoryId</td>
+                <td>@priceHistory.Products?.ProductName</td>
+                <td>@priceHistory.OldPrice</td>
+                <td>@priceHistory.NewPrice</td>
+                <td>@priceHistory.ChangeDate.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a class="btn btn-primary" asp-action="Create">Yeni Fiyat Değişikliği Ekle</a>

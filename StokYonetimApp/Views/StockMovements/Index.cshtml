@@ -1,0 +1,39 @@
+﻿@model IEnumerable<StockMovements>
+
+<h1>Stok Hareketleri</h1>
+
+<form method="get" action="@Url.Action("Index")">
+    <div class="form-group">
+        <label for="startDate">Başlangıç Tarihi:</label>
+        <input type="date" id="startDate" name="startDate" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="endDate">Bitiş Tarihi:</label>
+        <input type="date" id="endDate" name="endDate" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Filtrele</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Stok ID</th>
+            <th>Ürün ID</th>
+            <th>Hareket Türü</th>
+            <th>Miktar</th>
+            <th>Tarih</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var stockMovement in Model)
+        {
+            <tr>
+                <td>@stockMovement.StockId</td>
+                <td>@stockMovement.ProductId</td>
+                <td>@stockMovement.MovementType</td>
+                <td>@stockMovement.Quantity</td>
+                <td>@stockMovement.MovementDate.ToString("yyyy-MM-dd")</td>
+            </tr>
+        }
+    </tbody>
+</table>
